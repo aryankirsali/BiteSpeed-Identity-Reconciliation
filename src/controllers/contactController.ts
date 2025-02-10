@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { identifyContact } from "../services/contactService";
 
+// Handle incoming post requests on /identify endpoint
 const identifyContactHandler = async (req: Request, res: Response) => {
   try {
     const { email, phoneNumber } = req.body;
