@@ -9,6 +9,12 @@ const pool = new Pool({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port: Number(process.env.DB_PORT) || 5432,
+  max: 20, // Connection pool size
+  idleTimeoutMillis: 30000, // Close idle connections
+  connectionTimeoutMillis: 2000, // Timeout on connect
 });
+
+pool.on("connect", () => console.log("✅ Connected to PostgreSQL"));
+pool.on("error", (err) => console.error("❌ Database error:", err));
 
 export default pool;
