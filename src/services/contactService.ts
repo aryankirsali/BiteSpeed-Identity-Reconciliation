@@ -67,7 +67,7 @@ const handleExistingContacts = async (
       (email && !existingEmails.has(email)) ||
       (phoneNumber && !existingPhones.has(phoneNumber));
 
-    let newSecondaryContact = null;
+    let newSecondaryContact: Contact | null = null;
     if (shouldCreateSecondary) {
       console.log(
         `[handleExistingContacts] Creating secondary contact for email: ${email}, phone: ${phoneNumber}`
@@ -78,7 +78,9 @@ const handleExistingContacts = async (
         primaryContact.id,
         "secondary"
       );
-      secondaryContacts.push(newSecondaryContact);
+      if (newSecondaryContact) {
+        secondaryContacts.push(newSecondaryContact);
+      }
     }
 
     // Check if any existing primary should be converted to secondary
